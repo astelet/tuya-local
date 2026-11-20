@@ -1,0 +1,77 @@
+name: Air conditioner
+products:
+  - id: lqoe0ivlegz480i2
+    manufacturer: Qlima
+    model: SC4348
+entities:
+  - entity: climate
+    translation_key: aircon_extra
+    dps:
+      - id: 1
+        type: boolean
+        name: hvac_mode
+        mapping:
+          - dps_val: false
+            value: "off"
+          - dps_val: true
+            constraint: mode
+            conditions:
+              - dps_val: cold
+                value: cool
+              - dps_val: hot
+                value: heat
+              - dps_val: wet
+                value: dry
+              - dps_val: wind
+                value: fan_only
+              - dps_val: auto
+                value: heat_cool
+      - id: 2
+        type: integer
+        name: temperature
+        unit: C
+        range:
+          min: 17
+          max: 30
+      - id: 3
+        type: integer
+        name: current_temperature
+      - id: 4
+        type: string
+        name: mode
+        hidden: true
+      - id: 5
+        type: string
+        name: fan_mode
+        mapping:
+          - dps_val: auto
+            value: auto
+          - dps_val: low
+            value: low
+          - dps_val: middle
+            value: medium
+          - dps_val: high
+            value: high
+          - dps_val: strong
+            value: strong
+      - id: 15
+        type: boolean
+        name: swing_mode
+        mapping:
+          - dps_val: false
+            value: "off"
+          - dps_val: true
+            value: "on"
+  - entity: switch
+    name: Turbo
+    icon: mdi:fan-plus
+    dps:
+      - id: 5
+        type: string
+        name: switch
+        mapping:
+          - dps_val: strong
+            value: true
+          - dps_val: auto
+            value: false
+          - value: false
